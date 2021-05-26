@@ -59,13 +59,12 @@ function draw() {
   createEdgeSprites();
   
 
-  mario.collide(bricksGroup);
-
+  
 
   if (gameState == "start") {
-    //background("black");
+    background("black");
     console.log("my game starts")
-   // mario.visible = false;
+    mario.visible = false;
     wall.visible = false;
     button.visible = true;
     mario.depth = wall.depth+1
@@ -79,17 +78,13 @@ function draw() {
     textSize(20);
     text(" Welcome to the Mario Game!", 70, 46);
     text("Click on the button below to start", 60, 80);
-    text("Press the space button to start the game", 60, 120)
+    
 
-    // if (mousePressedOver(button)) {
-    //   gameState = "play";
-    // }
+     if (mousePressedOver(button)) {
+      gameState = "play";
+     }
 
-    if(keyDown("space")){
-      gameState= "play"
-      console.log(gameState)
-      console.log("game started")
-    }
+    
 
 
 
@@ -123,6 +118,9 @@ function draw() {
     obstacles();
     spawnBricks();
     coins();
+
+    mario.displace(bricksGroup);
+
   }
 
   if (gameState == "end") {
@@ -132,6 +130,7 @@ function draw() {
     bricksGroup.setVisibleEach(false);
     bricksGroup.setVelocityXEach = 0;
     coinsGroup.destroyEach()
+    bricksGroup.destroyEach()
     
     button.visible = false;
     ground.velocityX = 0
@@ -175,7 +174,7 @@ function draw() {
 
   }
 
-  if (keyDown(DOWN_ARROW)) {
+  if (mousePressedOver(button2)) {
     reset();
   }
 
@@ -247,7 +246,7 @@ function reset() {
 
   obstaclesGroup.setVisibleEach(false);
   bricksGroup.setVisibleEach(false);
-  // mario.visible = false
+ mario.visible = false
   coinsGroup.setVisibleEach(false);
   button2.visible=false;
   gameOver.visible = false;
